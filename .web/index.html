@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <title>PocketCloud</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header-wrapper">
+            <h1>PocketCloud</h1>
+            <div class="header-actions">
+                <span class="signed-in">Signed in as <strong>SESSION_USER</strong></span>
+                <a class="admin-link" id="admin-link" href="/admin">Admin Panel</a>
+                <button class="theme-toggle" id="btn-theme">Dark Mode</button>
+                <form method="POST" action="/logout" class="logout-form">
+                    <button type="submit" class="logout-btn">Sign out</button>
+                </form>
+            </div>
+        </div>
+        <script>document.getElementById('admin-link').hidden = (SESSION_IS_ADMIN !== 'true');</script>
+
+        <div id="file-list">FILE_LIST_HERE</div>
+        
+        <div class="upload-box">
+            <form method='POST' action='/upload' enctype='multipart/form-data'>
+                <input type='file' name='upload' required><br>
+                <input type='submit' value='Upload to Cloud'>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
