@@ -180,6 +180,7 @@ Sign in as Admin and click *Admin Panel* in the dashboard. From here you can:
 
 ## Project Structure
 
+```text
 PocketCloud/
 ├── pocketcloud_final.ino   Main firmware (ESP32-S3, Arduino framework)
 └── .web/
@@ -187,6 +188,8 @@ PocketCloud/
     ├── login.html          Login and sign-up page
     ├── style.css           Shared stylesheet
     └── script.js           Frontend JavaScript
+```
+
 
 ---
 
