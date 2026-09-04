@@ -1,6 +1,6 @@
 # PocketCloud
 
-A low-cost, self-contained local storage appliance built on the *ESP32-S3* microcontroller. PocketCloud lets you upload, download, and manage files through a secure, browser-accessible web interface over a private Wi-Fi network — no internet connection required.
+A low-cost, self-contained local storage appliance built on the *ESP32-S3* microcontroller. PocketCloud lets you upload, download, and manage files through a secure, browser-accessible web interface over a private Wi-Fi network, no internet connection required.
 
     Capstone project — Bachelor of Science in Information Technology  
     Aparece · Grave · Manalo · Meneses · Palomata
