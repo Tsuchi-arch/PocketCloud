@@ -93,6 +93,7 @@ Install all of the following via *Tools → Manage Libraries*:
 2. Create a folder named .web at the root of the card
 3. Copy the following files into .web/:
 
+```text
 MicroSD card/
 └── .web/
     ├── index.html
@@ -102,7 +103,7 @@ MicroSD card/
     ├── whitelist.txt     ← create as empty file
     ├── users.txt         ← create as empty file
     └── pending.txt       ← create as empty file
-
+```
     The three `.txt` files can be empty — the firmware creates them automatically on first boot if they are missing (as of the latest firmware version). Creating them manually is still recommended.
 
 
