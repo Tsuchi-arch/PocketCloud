@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <title>PocketCloud - Sign In</title>
+    <style>
+        .auth-tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+        .auth-tab { background: none; border: none; padding: 8px 14px; cursor: pointer; color: var(--text-main); opacity: 0.6; font-size: 0.95em; border-bottom: 2px solid transparent; }
+        .auth-tab.active { opacity: 1; border-bottom-color: var(--link-color); color: var(--text-header); }
+    </style>
+</head>
+<body>
+    <div class="container login-container">
+        <div class="header-wrapper">
+            <h1>PocketCloud</h1>
+            <button class="theme-toggle" id="btn-theme">Dark Mode</button>
+        </div>
+
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab active" id="tab-signin">Sign In</button>
+            <button type="button" class="auth-tab" id="tab-signup">Sign Up</button>
+        </div>
+
+        <p class="login-subtitle" id="auth-subtitle">Sign in to access your files.</p>
+
+        <form id="auth-form" class="login-form" method="POST" action="/login?next=index.html" autocomplete="on">
+            <label for="auth-user">Username</label>
+            <input type="text" id="auth-user" name="username" required autocomplete="username">
+
+            <label for="auth-pass">Password</label>
+            <input type="password" id="auth-pass" name="password" required autocomplete="current-password">
+
+            <!-- /login uses "email"; /signup uses "username". -->
+            <input type="hidden" id="email-field" name="email" value="">
+
+            <div class="login-error" id="auth-error" hidden></div>
+
+            <input type="submit" id="auth-submit" value="Sign In">
+        </form>
+    </div>
+
+    <script>
+        // Tab switching: swap action between /login and /signup.
+        var tabSignin = document.getElementById('tab-signin');
+        var tabSignup = document.getElementById('tab-signup');
+        var form = document.getElementById('auth-form');
+        var emailField = document.getElementById('email-field');
+        var submit = document.getElementById('auth-submit');
+        var subtitle = document.getElementById('auth-subtitle');
+        var userInput = document.getElementById('auth-user');
+        var errorEl = document.getElementById('auth-error');
+
+        function showError(msg) {
+            errorEl.textContent = msg;
+            errorEl.hidden = false;
+        }
+        function clearError() {
+            errorEl.textContent = '';
+            errorEl.hidden = true;
+        }
+
+        function setMode(signup) {
+            tabSignin.classList.toggle('active', !signup);
+            tabSignup.classList.toggle('active', signup);
+            if (signup) {
+                form.action = '/signup';
+                emailField.name = '_unused_email';
+                emailField.disabled = true;
+                submit.value = 'Request access';
+                subtitle.textContent = 'Sign up to request access. An admin will review.';
+            } else {
+                form.action = '/login?next=index.html';
+                emailField.name = 'email';
+                emailField.disabled = false;
+                submit.value = 'Sign In';
+                subtitle.textContent = 'Sign in to access your files.';
+            }
+            clearError();
+        }
+
+        tabSignin.addEventListener('click', function() { setMode(false); });
+        tabSignup.addEventListener('click', function() { setMode(true); });
+
+        // Show server-side error if redirected back with ?error=1.
+        if (location.search.indexOf('error=1') >= 0) {
+            showError('Invalid credentials.');
+        } else if (location.search.indexOf('signup=ok') >= 0) {
+            showError('Signup submitted. An admin will review your request.');
+            setMode(false);
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
